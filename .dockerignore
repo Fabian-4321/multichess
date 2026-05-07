@@ -3,3 +3,4 @@ dist
 .env
 .git
 *.tsbuildinfo
+frontend/dist

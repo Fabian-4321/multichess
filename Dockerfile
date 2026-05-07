@@ -1,21 +1,11 @@
-FROM node:20-slim
+FROM node:20
 
 WORKDIR /app
 
-COPY frontend/package*.json ./frontend/
-WORKDIR /app/frontend
-RUN npm install
-COPY frontend/ ./
-RUN npm run build
+COPY . .
 
-WORKDIR /app
-COPY backend/package*.json ./backend/
-WORKDIR /app/backend
-RUN npm install
-COPY backend/ ./
-RUN npm run build
+RUN cd frontend && npm install && npm run build
+RUN cd backend && npm install && npm run build
 
-WORKDIR /app
-ENV PORT=3001
 EXPOSE 3001
 CMD ["node", "backend/dist/index.js"]
